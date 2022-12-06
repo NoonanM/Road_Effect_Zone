@@ -3,7 +3,9 @@ title: "Rethinking the Road Effect Zone"
 author: "Michael J. Noonan$^{1*}$, Arnaud L. J. Desbiez, Adam T. Ford$^1$"
 header-includes:
    - \usepackage{amsmath}
-output: word_document
+   - \usepackage[left]{lineno}
+   - \usepackage{setspace}
+output: pdf_document
 citation_package: natbib
 bibliography: Refs.bib
 biblio-style: amnat
@@ -23,31 +25,39 @@ __\*Corresponding Author__: michael.noonan@ubc.ca \
 
 <br/>
 
-__Article type:__ Note
+__Article type:__ Note \
 
 
 | <!-- -->                  |   | <!-- -->                   |
 |---------------------------|---|----------------------------|
 |                           |   |                            |
-| Words in the abstract: XX |   | Number of Figures: 2      |
+| Words in the abstract: 150 |   | Number of Figures: 2      |
 |                           |   |                            |
-| Words in main text: 3,000 max    |   | Number of tables: 0       |
+| Words in main text: 1,887 (3,000 max)    |   | Number of tables: 0       |
 |                           |   |                            |
-| Number of references: 150 max  |   | Supplementary material: 0 |
+| Number of references: 31  |   | Supplementary material: 0 |
 
 <br />
 
-\newpage
+\doublespacing
+\linenumbers
 
 # Abstract
 
+Roads are important for human socio-economic growth, but they carry substantial ecological impacts that can extend far beyond their physical footprint. This relationship has given rise to the so called `Road Effect Zone'. Although the concept of the Road Effect Zone has proven useful in understanding the ecological consequences of roads, it is limited in that it only considers impacts on the focal species, and combines the impacts of roads on multiple ecological processes into a single metric. Here, we introduce a more nuanced road effect zone based on probability theory that describes the broader ecological impacts of the mortality of an animal on the landscape. We demonstrate the utility of a probabilistic representation of the road effect zone for giant anteaters living near a highway in Brazil. We then conclude with a brief discussion of how this novel metric can be employed in practice to inform species conservation.\
+
+<br/>
+
 __Keywords:__ Anthropogenic impacts, GPS tracking, Home range, Space use, Road ecology
+
+\newpage
+
 
 # Introduction
 
-The ca. 64,000,000 km of roads distributed across the globe are important for human socio-economic growth [@Ibisch:2016], but, although the area that roads occupy might be small, their ecological impacts can extend far beyond their physical footprint [@Forman:1998; @Forman:2003]. From an ecological perspective, roads and roadside ecotones are viewed high disturbance systems with non-natural chemical, physical, hydrological, and auditory properties [@Reijnen:1996; @Forman:1998; @Brady:2017]. Roads have been shown to alter population densities [@Reijnen:1996; @Andrasi:2021], community composition [@Truscott:2005], evolutionary trajectories [@Brown:2013; @Brady:2017], and are a serious source of non-natural mortality for many species [@Desbiez:2020; @Ascensao:2022]. Fully understanding the ecological footprint of roads is thus of the utmost importance if we are to design well-informed mitigation strategies.
+The ca. 64,000,000 km of roads distributed across the globe are important for human socio-economic growth [@Ibisch:2016]. Yet, while the area that roads occupy might be small, they carry substantial ecological impacts [@Coffin:2007; @Fahrig:2009; @Ascensao:2022] that can extend far beyond their physical footprint [@Forman:1998; @Forman:2003]. From an ecological perspective, roads and roadside ecotones are considered high disturbance systems with non-natural chemical, physical, hydrological, and auditory properties [@Reijnen:1996; @Forman:1998; @Brady:2017]. Roads have been shown to alter population densities [@Reijnen:1996; @Fahrig:2009; @Andrasi:2021], community composition [@Truscott:2005], evolutionary trajectories [@Brown:2013; @Brady:2017], and are a serious source of non-natural mortality for many species [@Desbiez:2020; @Silva:2020; @Ascensao:2022]. Fully understanding the ecological footprint of roads is thus of the utmost importance if we are to design well-informed ecological mitigation strategies.
 
-The ecological impacts of roads are usually strongest directly on the road and they decay in intensity as the distance from the road increases. This relationship has given rise to the so called `Road Effect Zone' [@Forman:1998; @Forman:2000], which describes the distance up to which the ecological impact of a road can be measured (Fig. 1). Ecologists and conservation practitioners regularly quantify road effect zones for different species [e.g., @Semlitsch:2007; @Eigenbrod:2009; @Andrasi:2021], and these distances are often used to make conservation recommendations [e.g., @Peaden:2015]. Although this concept has proven useful in understanding the ecological consequences of roads, it is limited in that it only considers impacts on the focal species, and does not provide a framework for scaling up to population-, or community-level effects. Here, we re-frame the road effect zone as a joint probability and demonstrate how an animal's home range can be used to quantify the broader ecological cost of road induced mortality. Although our focus here is on motile animals, the concepts presented herein can be readily extended to other ecological processes.
+Roads can cause a broad range of ecological impacts, but their effects are usually strongest directly on the road, and decay in intensity with increasing distance from the road. This relationship has given rise to the so called `Road Effect Zone' [@Forman:1998; @Forman:2000], which describes the distance up to which the ecological impact of a road can be measured (Fig. 1). Ecologists and conservation practitioners regularly quantify road effect zones for different species [e.g., @Semlitsch:2007; @Eigenbrod:2009; @Andrasi:2021], and these distances are often used to make conservation recommendations [e.g., @Forman:2000b; @Peaden:2015]. Although this concept has proven useful in understanding the ecological consequences of roads, it is correlative in nature and thus limited in that it combines the impacts of roads on multiple ecological processes into a single metric. For instance, consider a situation where there is a measurable reduction in the population density of a species near a road. This effect may be due to increased road-induced mortality, but it may also be due to altered habitat preference. Each of these mechanisms may  reduce roadside population densities, but each would require different mitigation strategies. Here, we introduce a more nuanced road effect zone that describes the broader ecological impacts that the mortality of an animal might have on the landscape. 
 
 <br/>
 <p align="center">
@@ -60,12 +70,14 @@ The ecological impacts of roads are usually strongest directly on the road and t
 
 # The Road Effect Zone as a Joint Probability
 
-Our purpose in this note is to demonstrate how probability theory can provide powerful tool for re-thinking the road effect zone. As noted above, our focus here is on motile animals, and so our framework begins from that starting point. An individual's home range describes the space it uses to undergo `_its normal activities of food gathering, mating, and caring for young_' [@Burt:1943he]. Ecologists have long recognised the utility of the home range concept in describing patterns of space use [e.g., @Kie:2010es], and routinely estimate animal home ranges through the process of home range estimation [see @AKDEvsKDE]. Statistically, home range estimation results in a probability distribution function (PDF) satisfying
+As noted above, our focus here is on the ecological impact of an animal being roadkilled, and so our framework begins from the concept of an animal space use and movement ecology. An individual's home range describes the space it uses to undergo `_its normal activities of food gathering, mating, and caring for young_' [@Burt:1943he]. Ecologists have long recognised the utility of the home-range concept in describing patterns of space use [e.g., @Kie:2010es], and routinely estimate home ranges from animal tracking data [see @AKDEvsKDE]. Statistically, home-range estimation results in a probability distribution function ($\mathrm{PDF_{HR}}$) satisfying
+
 \begin{equation}
-\iint_{-\infty}^\infty \mathrm{Home~range}~dxdy = 1,
+\iint_{-\infty}^\infty \mathrm{PDF_{HR}}~dxdy = 1.
 \end{equation}
 
-which provides information on the locations where an animal is more, or less, likely to be found. Importantly, for the context of understanding the effects of roads on ecological processes, this PDF also represents the space over which an individual's ecological interactions (e.g., foraging, mating, defecating, engaging in territorial defence, etc.) are expected to occur. This PDF can thus be considered to be proportional to an animal's impact on the ecosystem, with core areas of the PDF being more heavily impacted than tail areas. Under the assumption that the probability of an animal being roadkilled $P\{\mathrm{Roadkilled}\}$ is proportional to the amount of time it spends on the road, we can also quantify $P\{\mathrm{Roadkilled}\}$ by integrating the home range PDF ($\mathrm{PDF_{HR}}$) over the area the falls on road surfaces
+This PDF provides information on the locations where an animal is more, or less, likely to be found. Importantly for the context of understanding the effects of roads on ecological processes, this PDF also represents the space over which an individual's ecological interactions (e.g., foraging, mating, defecating, engaging in territorial defence, etc.) are expected to occur. This PDF can thus be considered to be proportional to an animal's impact on the ecosystem, with core (i.e., high probability) areas of the PDF being more heavily impacted than tail (i.e., low probability) areas. Under the assumption that the probability of an animal being roadkilled $P\{\mathrm{Roadkilled}\}$ is proportional to the amount of time it spends on the road, we can quantify $P\{\mathrm{Roadkilled}\}$ by integrating $\mathrm{PDF_{HR}}$ over the area the falls on road surfaces
+
 \begin{equation}
 P\{\mathrm{Roadkilled}\} = \iint_{r}^{r^i} \mathrm{PDF_{HR}}~dxdy,
 \end{equation}
@@ -76,23 +88,23 @@ where $r$ and $r^i$ represent the road margins. Similarly, the probability of an
 P\{\mathrm{Ecological~Interactions}\} = \iint_{-\infty}^\infty \mathrm{PDF_{HR}}~dxdy - P\{\mathrm{Roadkilled}\}.
 \end{equation}
 
-The ecological ecological cost of a roadkilled animal not being able to engage in normal behaviour across its home range can thus be quantified via the joint probability of an animal encountering a vehicle on a road and being roadkilled $P\{\mathrm{Roadkilled}\}$ and the probability of an animal engaging in ecologically relevant behaviour $P\{\mathrm{Ecological~Interactions}\}$, or $P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\}$. Another way of seeing this is that $P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\}$ quantifies the probability of an animal engaging in normal behaviour after being roadkilled. Given that both of these events can not occur, $P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\}$ quantifies the road effect. Assuming independence, the road effect is thus given by:
+The ecological ecological cost of a roadkilled animal not being able to engage in normal behaviour across its home range can thus be quantified via the joint probability of an animal encountering a vehicle on a road and being roadkilled $P\{\mathrm{Roadkilled}\}$ and the probability of an animal engaging in ecologically relevant behaviour $P\{\mathrm{Ecological~Interactions}\}$, or $P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\}$. Another way of seeing this is that $P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\}$ quantifies the probability of an animal engaging in normal behaviour after being roadkilled. Given that both of these events can not occur, $P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\}$ can be seen as quantifying the probability of an ecological impact. Assuming independence, this probabilistic road effect is given by the joint probability of these two events
 
 \begin{equation}
 P\{\mathrm{Road~Effect}\} = P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\} = P\{\mathrm{Roadkilled}\}P\{\mathrm{Ecological~Interactions}\}
 \end{equation}
 
-If an animal occupies a home range that is far away from a road $P\{\mathrm{Roadkilled}\}$ will be 0, resulting no road effect. Similarly, if an animal spends all of its time on roads, $P\{\mathrm{Roadkilled}\}$ may be high, but $P\{\mathrm{Ecological~Interactions}\}$ will be 0, also resulting in no road effect. For animals where $P\{\mathrm{Roadkilled}\} \neq 0$ and $P\{\mathrm{Ecological~Interactions}\} \neq 0$, however, the road effect will be some non-zero value with a strength that is a function of how much time an animal spends on roads relative to the rest of its home range. Notably, we can also integrate over areas of interest to calculate the local road effect. For instance, the road effect within some distance threshold of a road can be quantified as
+If an animal occupies a home range that is far away from a road $P\{\mathrm{Roadkilled}\}$ will be $\approx$ 0, resulting no road effect. Similarly, if an animal spends all of its time on roads, $P\{\mathrm{Roadkilled}\}$ may be high, but $P\{\mathrm{Ecological~Interactions}\}$ will be $\approx$ 0, also resulting in no road effect. For animals where $P\{\mathrm{Roadkilled}\} \neq 0$ and $P\{\mathrm{Ecological~Interactions}\} \neq 0$, however, the road effect will be some non-zero probability with a strength that is a function of how much time an animal spends on roads relative to the rest of its home range. While this general concept is useful, we can also integrate over areas of interest to calculate the local road effect. For instance, the road effect within some distance threshold of a road can be quantified as
 
 \begin{equation}
 \iint_{z}^{z^i} P\{\mathrm{Roadkilled},\mathrm{Ecological~Interactions}\}~dxdy,
 \end{equation}
 
-where $z$ and $z^i$ represent distance thresholds from the road edge. For instance, setting $z$ to 0m and $z^i$ to 1m would provide the `road effect' within 1m of the road edge.
+where $z$ and $z^i$ represent distance thresholds from the road edge. For example, setting $z$ to 0m and $z^i$ to 1m would provide the probability of a road effect within 1m of the road edge. Defining the road effect zone in this way allows is to flexibly take individual-specific forms based on each animal's patterns of space use. Although our focus here is on the ecological impacts of roadkilled animals, the concepts presented herein can be readily extended to other spatially explicit ecological processes. 
 
 # The Road Effect Zone for Giant Anteaters
 
-Here, we demonstrate the utility of a probabilistic representation of the road effect zone on a pair of giant anteaters (_Myrmecophaga tridactyla_) from the Brazilian Cerrado. Giant anteaters are the largest extant anteater, reaching over 2 m and weighing up to 50kg [@McNab:1984] and are distributed throughout Central and South America [@Gardner:2008]. Giant anteater populations have suffered severe reductions and wildlife-vehicle-collisions are a major threat to their survival [@Ascensao:2021; @Noonan:2022b]. Wild giant anteaters were captured between 2017 and 2018, in the vicinity of the three paved highways in the state of Mato Grosso do Sul, in the Cerrado biome, and equipped with tracking collars that obtained GPS fixes at 20-min intervals [for full details see @Noonan:2022b]. A previous analysis on these data suggested these individuals occupied fixed (i.e. stationary) home ranges that regularly overlapped paved highways. Following the workflow described above, we estimated the road effect zone for these two individuals in \texttt{R} [ver. 4.2.1, @RAlanguageanden:2016wf]. The \texttt{R} scripts required to reproduce these analyses and estimate the road effect zone from animal tracking data are openly available at https://github.com/NoonanM/Road_Effect_Zone.
+Here, we demonstrate the utility of a probabilistic representation of the road effect zone on a pair of giant anteaters (_Myrmecophaga tridactyla_) from the Brazilian Cerrado. Giant anteaters are the largest extant anteater, reaching over 2 m and weighing up to 50kg [@McNab:1984] and are distributed throughout Central and South America [@Gardner:2008]. Giant anteater populations have suffered severe reductions and wildlife-vehicle-collisions are a major threat to their survival [@Ascensao:2021; @Noonan:2022b]. Wild giant anteaters were captured between 2017 and 2018, in the vicinity of the three paved highways in the state of Mato Grosso do Sul, in the Cerrado biome, and equipped with tracking collars that obtained GPS fixes at 20-min intervals [for full details see @Noonan:2022b]. A preliminary analysis on these data suggested that these individuals occupied fixed home ranges that regularly overlap paved highways. Following the workflow described above, we estimated the road effect zone for these two individuals in \texttt{R} [ver. 4.2.1, @RAlanguageanden:2016wf]. Home range areas were estimated using Autocorrelated Kernel Density Estimation [AKDE, @Fleming:2015tw] via the \texttt{ctmm R} package [ver. 1.1.0, @Calabrese:2016ey]. The \texttt{R} scripts required to reproduce these analyses and estimate the road effect zone from animal tracking data are openly available at https://github.com/NoonanM/Road_Effect_Zone.
 
 <br/>
 <p align="center">
@@ -100,9 +112,16 @@ Here, we demonstrate the utility of a probabilistic representation of the road e
 </p>
 <br/>
 
-The two animals we estimated road effect zones for exhibited two different patterns in space use, with one animal occupying a home range that was centered on the road (Fig. 1A), whereas the other occupied the roadside, but spent little time on the road itself (Fig. 1B). As would be expected for an animal that lives right along the roadside, the ecological effects of a road mortality were greatest near the road (Fig. 1C). For the second animal, their home range was further from the road, resulting in a weaker overall road effect, but one that peaked in effect between 1-2km from the road (Fig. 1D).
+The two animals we estimated our road effect zones for exhibited two different patterns in space use. One animal occupied a home range that was centered on the road (Fig. 1A), whereas the other occupied the roadside and surrounding area, but spent little time on the road itself (Fig. 1B). As would be expected for the animal that lived right along the roadside, the ecological effects of a road mortality were greatest near the road (Fig. 1C). For the second animal, their home range was further from the road, resulting in a weaker overall road effect, but one that peaked in probability between 1-2km from the road (Fig. 1D). In other words, although $P\{\mathrm{Roadkilled}\}$ was greater for the first giant anteater, the road has the probability to impact the ecosystem more than 2km away from the road through the loss of the second giant anteater.
 
 # Discussion
+The idea that ecological conditions will be more pristine the further one moves from away from a road has been a focal point of road ecology research since @Forman:1998 first introduced the concept of the Road Effect Zone more than two decades ago [@Reijnen:1996; @Forman:1998; @Forman:2000b; @Semlitsch:2007; @Eigenbrod:2009; @Peaden:2015; @Brady:2017; @Andrasi:2021]. This traditional viewpoint is focused on quantifying the area over which roads alter physical, chemical, hydrological, and auditory properties [@Reijnen:1996; @Forman:1998; @Brady:2017], population densities [@Reijnen:1996; @Fahrig:2009; @Andrasi:2021], and/or community composition [@Truscott:2005]. While this concept has proven informative for understanding the ecological footprint of roads, there is a level of nuance that is not captured. Here we demonstrate how probability theory can provide powerful tool for re-thinking the road effect zone, and an individual-based framework for scaling up to population-, or community-level effects. For instance, migratory ungulates move over vast distance between seasonal home ranges [@Kauffman:2020; @Kauffman:2021]. The effects of these animals being roadkilled might decrease nutrient transfer [@Subalusky:2017], prey densities [@Walton:2017], or grazing pressure [@Augustine:1998] hundreds or even thousands of kilometers away from the road. Similarly, for territorial species, the death of a roadside animal can have a cascading effect on the species' socio-spatial arrangement over vastly larger distances than the conventional Road Effect Zone might capture.
+
+In this study we have developed a probabilistic framework for estimating road effect zones from animal movement data. Conceptually, this framework describes the broader ecological impacts of the mortality of an animal on the landscape, and compliments the original concept of the Road Effect Zone first introduced by @Forman:1998. Furthermore, using movement data from giant anteaters occupying roadside habitats in Brazil, we have demonstrated how this framework can be used in practice to understand the ecological cost of a road, and help inform species management. Notably, this framework builds straightforwardly off of home-range estimation and requires no specialized data collection protocols, allowing researchers to easily quantify the potential ecological impacts of roads.
+
+# Acknowledgments
+
+This work was supported by an NSERC Discovery Grant RGPIN-2021-02758 to MJN, as well as the Canadian Foundation for Innovation. We would like to thank the donors to the Anteaters and Highways Project especially the Foundation Segre as well as North American and European Zoos listed at http://www.giantanteater.org/. We would also like to thank the owners of all the ranches that allowed us to monitor animals on their property, in particular Nhuveira, Quatro Irmãos and Santa Lourdes ranches and also thank to M. Alves, D. Kluyber, C. Luba, A. Alves, as well as all of the volunteers who assisted in carrying out the fieldwork.
 
 # References
 
