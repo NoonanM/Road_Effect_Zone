@@ -237,7 +237,11 @@ ggplot(results_jenn) +
         plot.margin = unit(c(0.2,0.1,0.2,0.2), "cm")) +
   scale_y_continuous(limits = c(0, 0.00015), expand = c(0,0.000001)) +
   xlab("Distance from road (m)") +
+<<<<<<< HEAD
   ylab("Probability of a road effect")
+=======
+  ylab("Road Effect ")
+>>>>>>> 0be5af00e170c5fc7e2c55e7ba0066c3b396a7e7
 
 
 SCOTT_FIG_2 <- 
@@ -258,7 +262,11 @@ SCOTT_FIG_2 <-
         plot.margin = unit(c(0.2,0.1,0.2,0.2), "cm")) +
   #scale_y_continuous(limits = c(0, 0.00015), expand = c(0,0.000001)) +
   xlab("Distance from road (m)") +
+<<<<<<< HEAD
   ylab("Probability of a road effect")
+=======
+  ylab("Road Effect")
+>>>>>>> 0be5af00e170c5fc7e2c55e7ba0066c3b396a7e7
 
 
 FIG <-
