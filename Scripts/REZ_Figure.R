@@ -9,7 +9,6 @@ Logit_Link <- function(x) {
   mu
 }
 
-
 logit_pred <- rev(Logit_Link(seq(-130,120, 0.01)))
 
 FIG <- 
